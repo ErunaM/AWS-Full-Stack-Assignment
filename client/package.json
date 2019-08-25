@@ -7,6 +7,7 @@
     "bootstrap": "^4.3.1",
     "css-loader": "^3.2.0",
     "http-proxy-middleware": "^0.19.1",
+    "materialize-css": "^1.0.0-rc.2",
     "react": "^16.9.0",
     "react-bootstrap": "^1.0.0-beta.12",
     "react-dom": "^16.9.0",
@@ -14,6 +15,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
     "redux": "^4.0.4",
+    "redux-form": "^8.2.6",
     "redux-thunk": "^2.3.0",
     "style-loader": "^1.0.0"
   },
