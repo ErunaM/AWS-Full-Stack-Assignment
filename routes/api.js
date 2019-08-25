@@ -1,5 +1,5 @@
 module.exports = app => {
-  app.post('/api/silo', (req, res) => {
+  app.get('/api/silo', (req, res) => {
       console.log("Backend baby");
   });
 };
