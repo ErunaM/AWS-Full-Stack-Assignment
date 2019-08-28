@@ -26,7 +26,7 @@ module.exports = app => {
   });
   app.get('/api/temp', async (req, res) => {
     try{
-      
+  
     }catch (error) {
 
     }
