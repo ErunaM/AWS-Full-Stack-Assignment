@@ -26,10 +26,7 @@ module.exports = app => {
   });
   app.get('/api/temperature', async (req, res) => {
     try{
-      startDate = ''
-      endDate = ''
-      stationID = 1000
-
+  
     }catch (error) {
 
     }

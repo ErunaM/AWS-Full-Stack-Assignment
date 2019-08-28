@@ -14,8 +14,6 @@ import Line from '@bit/recharts.recharts.line';
 import Tooltip from '@bit/recharts.recharts.tooltip';
 import Legend from '@bit/recharts.recharts.legend';
  // import CartesianGrid from '@bit/recharts.recharts.cartesian-grid';
-
-
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-select/dist/react-select.css'
 import 'react-virtualized/styles.css'
@@ -30,16 +28,28 @@ class Graph extends Component {
 		this.state = {
 			places: [],
 			startDate: new Date(),
-			endDate: new Date()
+			endDate: new Date(),
+			station: ""
 		}
 		this.handleChangeStartDate = this.handleChangeStartDate.bind(this);
 		this.handleChangeEndDate = this.handleChangeEndDate.bind(this);
+		this.handleLocationChange = this.handleLocationChange.bind(this);
+		this.plotGraph = this.plotGraph.bind(this)
+
 	}
-	dothing(e){
-		console.log(e)
-	}
-	plotGraph(e){
-		console.log(e)
+
+	plotGraph(){
+		// console.log(this.state)
+		var postJson = {
+			station : this.state.station,
+			startDate : this.state.startDate,
+			endDate : this.state.endDate
+		}
+		console.log(postJson)
+		// axios.post('/api/temperature').then((e) => {
+		// 	console.log(e)
+		// })
+
 	}
 	handleChangeStartDate(date) {
 		this.setState({
@@ -52,12 +62,19 @@ class Graph extends Component {
 		});
 
 	}
+	handleLocationChange(e){
+		console.log(e.value)
+		this.setState({
+			station: e.value,
+			selectValue: e
+
+		})
+	}
+
 	componentDidMount() {
-		// this.props.fetchData().then(e=>{
-		// 	console.log(e)
-		// })
+
 		axios.get('/api/silo').then((e) =>{
-			// console.log(e.data),
+
 			this.setState({
 				places: e.data
 			})
@@ -94,25 +111,24 @@ class Graph extends Component {
 		];
 
 		var name;
-
+		var station;
 		var options = []
 		for (var i=0; i < this.state.places.length; i++){
 			name = this.state.places[i][1]
+			station = this.state.places[i][0]
 			var jsonstuff = {}
 			jsonstuff.label = name
-			jsonstuff.value = name
+			jsonstuff.value = station
 			options.push(jsonstuff)
 		}
-		// console.log(options)
-		// const options = this.state.places
 
 		return (
 			<div className="container">
 				<VirtualizedSelect
 					 options={options}
-					 onChange={(selectValue) => this.setState({ selectValue })}
+					 onChange={(selectValue) => this.handleLocationChange(selectValue)}
 					 value={this.state.selectValue}
-					 onClick={this.dothing(this.state.selectValue)}
+
 				 />
 				 <label>
 			    Start Date:
@@ -129,7 +145,7 @@ class Graph extends Component {
 					 onChange={this.handleChangeEndDate}
 				 />
 				 <br/>
-				 <Button variant="primary" size="lg" onClick={this.plotGraph(this.state)}>
+				 <Button variant="primary" size="lg" onClick={this.plotGraph.bind(this.state)}>
 					 Plot Graph
 				 </Button>
 				 <LineChart
