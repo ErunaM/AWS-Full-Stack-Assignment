@@ -24,9 +24,12 @@ module.exports = app => {
       }
       console.log("Backend baby");
   });
-  app.get('/api/temp', async (req, res) => {
+  app.get('/api/temperature', async (req, res) => {
     try{
-      
+      startDate = ''
+      endDate = ''
+      stationID = 1000
+
     }catch (error) {
 
     }
