@@ -13,8 +13,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@bit/recharts.recharts.line-chart": "^1.6.2",
+    "axios": "^0.19.0",
+    "bit": "^1.0.20",
     "concurrently": "^4.1.2",
     "express": "^4.17.1",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "react-datepicker": "^2.8.0",
+    "react-virtualized-select": "^3.1.3"
   }
 }
