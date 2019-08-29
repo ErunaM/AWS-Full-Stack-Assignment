@@ -10,7 +10,7 @@ export const fetchData = values => async dispatch => {
 };
 
 export const fetchTempData = values => async dispatch => {
-    const res = await axios.get('/api/temp', values);
+    const res = await axios.post('/api/temperature', values);
 
     // console.log("DATA", res.data)
     dispatch({ type: FETCH_TEMP, payload: res.data});

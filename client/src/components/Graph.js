@@ -46,9 +46,9 @@ class Graph extends Component {
 			endDate : this.state.endDate
 		}
 		console.log(postJson)
-		// axios.post('/api/temperature').then((e) => {
-		// 	console.log(e)
-		// })
+		var postJson = JSON.parse(JSON.stringify(postJson))
+		this.props.fetchTempData(postJson)
+		console.log(this.props.temp)
 
 	}
 	handleChangeStartDate(date) {
@@ -73,49 +73,55 @@ class Graph extends Component {
 
 	componentDidMount() {
 
-		axios.get('/api/silo').then((e) =>{
-
-			this.setState({
-				places: e.data
-			})
-
-		}).catch(e =>
-			console.log(e)
-		)
-
+			this.props.fetchData()
 
 	}
 	render() {
-		const data = [
-			{
-				name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
-			},
-			{
-				name: 'Page B', uv: 3000, pv: 1398, amt: 2210,
-			},
-			{
-				name: 'Page C', uv: 2000, pv: 9800, amt: 2290,
-			},
-			{
-				name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
-			},
-			{
-				name: 'Page E', uv: 1890, pv: 4800, amt: 2181,
-			},
-			{
-				name: 'Page F', uv: 2390, pv: 3800, amt: 2500,
-			},
-			{
-				name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
-			},
-		];
+
+		console.log(this.props.temp)
+		var temp = this.props.temp
+
+		const data = []
+		for(i = 0; i < temp.length; i++){
+			console.log(temp[i].date)
+			//Max Temp
+			console.log(temp[i].variables[0].value)
+			//Min Temp
+			console.log(temp[i].variables[1].value)
+			data.push({
+				name: temp[i].date, maxTemp: temp[i].variables[0].value, minTemp: temp[i].variables[1].value, amt: 2400,
+			})
+		}
+		// const data = [
+		// 	{
+		// 		name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
+		// 	},
+		// 	{
+		// 		name: 'Page B', uv: 3000, pv: 1398, amt: 2210,
+		// 	},
+		// 	{
+		// 		name: 'Page C', uv: 2000, pv: 9800, amt: 2290,
+		// 	},
+		// 	{
+		// 		name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
+		// 	},
+		// 	{
+		// 		name: 'Page E', uv: 1890, pv: 4800, amt: 2181,
+		// 	},
+		// 	{
+		// 		name: 'Page F', uv: 2390, pv: 3800, amt: 2500,
+		// 	},
+		// 	{
+		// 		name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
+		// 	},
+		// ];
 
 		var name;
 		var station;
 		var options = []
-		for (var i=0; i < this.state.places.length; i++){
-			name = this.state.places[i][1]
-			station = this.state.places[i][0]
+		for (var i=0; i < this.props.places.length; i++){
+			name = this.props.places[i][1]
+			station = this.props.places[i][0]
 			var jsonstuff = {}
 			jsonstuff.label = name
 			jsonstuff.value = station
@@ -161,8 +167,8 @@ class Graph extends Component {
 					 <YAxis />
 					 <Tooltip />
 					 <Legend />
-					 <Line type="monotone" dataKey="pv" stroke="#8884d8" strokeDasharray="5 5" />
-					 <Line type="monotone" dataKey="uv" stroke="#82ca9d" strokeDasharray="3 4 5 2" />
+					 <Line type="monotone" dataKey="maxTemp" stroke="#8884d8" strokeDasharray="5 5" />
+					 <Line type="monotone" dataKey="minTemp" stroke="#82ca9d" strokeDasharray="3 4 5 2" />
 				 </LineChart>
 			</div>
 		);
@@ -173,6 +179,10 @@ Graph = reduxForm({
 	form: 'Graph'
 })(Graph);
 
+function mapStateToProps({ places, temp }) {
+	return { places, temp };
+}
 
 
-export default connect(null, actions)(Graph);
+
+export default connect(mapStateToProps, actions)(Graph);
