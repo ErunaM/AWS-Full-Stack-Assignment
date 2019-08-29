@@ -5,12 +5,12 @@ export default class Navigation extends Component{
   render(){
     return(
   <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-  <Navbar.Brand href="/">React-Bootstrap</Navbar.Brand>
+  <Navbar.Brand href="/">Climate Change Booy</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">
-      <Nav.Link href="/">Map</Nav.Link>
-      <Nav.Link href="/Graph">Graph</Nav.Link>
+      <Nav.Link href="/Map">Map</Nav.Link>
+      <Nav.Link href="/">Graph</Nav.Link>
       <NavDropdown title="TBA" id="collasible-nav-dropdown">
         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>

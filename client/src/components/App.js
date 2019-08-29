@@ -13,8 +13,8 @@ class App extends Component {
       <div>
           <NavigationBar />
           <BrowserRouter className="container">
-						<Route exact path="/" component={Map} />
-						<Route exact path="/Graph" component={Graph} />
+						<Route exact path="/" component={Graph} />
+						<Route exact path="/Map" component={Map} />
 				</BrowserRouter>
       </div>
 		);

@@ -18,6 +18,9 @@
     "bit": "^1.0.20",
     "concurrently": "^4.1.2",
     "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
+    "https": "^1.0.0",
     "nodemon": "^1.19.1",
     "react-datepicker": "^2.8.0",
     "react-virtualized-select": "^3.1.3"
